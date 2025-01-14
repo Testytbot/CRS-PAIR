@@ -120,7 +120,7 @@ router.get("/", async (req, res) => {
       }
     }
   }
-  return await CrsPair();
+  return await RobinPair();
 });
 
 process.on("uncaughtException", function (err) {
