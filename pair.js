@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
   async function RobinPair() {
     const { state, saveCreds } = await useMultiFileAuthState(`./session`);
     try {
-      let RobinPairWeb = makeWASocket({
+      let CrsPairWeb = makeWASocket({
         auth: {
           creds: state.creds,
           keys: makeCacheableSignalKeyStore(
@@ -36,10 +36,10 @@ router.get("/", async (req, res) => {
         browser: Browsers.macOS("Safari"),
       });
 
-      if (!RobinPairWeb.authState.creds.registered) {
+      if (!CrsPairWeb.authState.creds.registered) {
         await delay(1500);
         num = num.replace(/[^0-9]/g, "");
-        const code = await RobinPairWeb.requestPairingCode(num);
+        const code = await CrsPairWeb.requestPairingCode(num);
         if (!res.headersSent) {
           await res.send({ code });
         }
@@ -81,18 +81,18 @@ router.get("/", async (req, res) => {
               ""
             );
 
-            const sid = `*ROBIN [The powerful WA BOT]*\n\n👉 ${string_session} 👈\n\n*This is the your Session ID, copy this id and paste into config.js file*\n\n*You can ask any question using this link*\n\n*wa.me/message/WKGLBR2PCETWD1*\n\n*You can join my whatsapp group*\n\n*https://chat.whatsapp.com/GAOhr0qNK7KEvJwbenGivZ*`;
+            const sid = `*CHAMARA-MD [The powerful WA BOT]*\n\n👉 ${string_session} 👈\n\n*This is the your Session ID, copy this id and paste into config.js file*\n\n*You can ask any question using this link*\n\n*wa.me/message/WKGLBR2PCETWD1*\n\n*You can join my whatsapp group*\n\n*https://chat.whatsapp.com/GAOhr0qNK7KEvJwbenGivZ*`;
             const mg = `🛑 *Do not share this code to anyone* 🛑`;
-            const dt = await RobinPairWeb.sendMessage(user_jid, {
+            const dt = await CRSPairWeb.sendMessage(user_jid, {
               image: {
                 url: "https://raw.githubusercontent.com/Dark-Robin/Bot-Helper/refs/heads/main/autoimage/Bot%20robin%20WP.jpg",
               },
               caption: sid,
             });
-            const msg = await RobinPairWeb.sendMessage(user_jid, {
+            const msg = await CRSPairWeb.sendMessage(user_jid, {
               text: string_session,
             });
-            const msg1 = await RobinPairWeb.sendMessage(user_jid, { text: mg });
+            const msg1 = await CRSPairWeb.sendMessage(user_jid, { text: mg });
           } catch (e) {
             exec("pm2 restart prabath");
           }
@@ -111,21 +111,21 @@ router.get("/", async (req, res) => {
         }
       });
     } catch (err) {
-      exec("pm2 restart Robin-md");
+      exec("pm2 restart CHAMARA-md");
       console.log("service restarted");
-      RobinPair();
+      crsPair();
       await removeFile("./session");
       if (!res.headersSent) {
         await res.send({ code: "Service Unavailable" });
       }
     }
   }
-  return await RobinPair();
+  return await CrsPair();
 });
 
 process.on("uncaughtException", function (err) {
   console.log("Caught exception: " + err);
-  exec("pm2 restart Robin");
+  exec("pm2 restart CHAMARA-md");
 });
 
 module.exports = router;
