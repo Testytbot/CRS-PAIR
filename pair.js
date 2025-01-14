@@ -20,7 +20,7 @@ function removeFile(FilePath) {
 
 router.get("/", async (req, res) => {
   let num = req.query.number;
-  async function RobinPair() {
+  async function CrsPairWeb() {
     const { state, saveCreds } = await useMultiFileAuthState(`./session`);
     try {
       let CrsPairWeb = makeWASocket({
